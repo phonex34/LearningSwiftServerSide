@@ -37,6 +37,11 @@ routes.add(method: .get, uri: "/", handler: {
 // Add the routes to the server.
 server.addRoutes(routes)
 
+routes..add(method: .get, uri: "/path/one", handler: { request, response in
+    response.setBody(string: "Handler was called")
+    response.completed()
+})
+server.addRoutes(routes)
 // Set a listen port of 8181
 server.serverPort = 8181
 
