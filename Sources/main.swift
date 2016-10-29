@@ -41,6 +41,38 @@ routes..add(method: .get, uri: "/path/one", handler: { request, response in
     response.setBody(string: "Handler was called")
     response.completed()
 })
+
+
+ar routes = Routes()
+// Create routes for version 1 API
+var api = Routes()
+api.add(method: .get, uri: "/call1", handler: { _, response in
+    response.setBody(string: "API CALL 1")
+    response.completed()
+})
+api.add(method: .get, uri: "/call2", handler: { _, response in
+    response.setBody(string: "API CALL 2")
+    response.completed()
+})
+
+// API version 1
+var api1Routes = Routes(baseUri: "/v1")
+// API version 2
+var api2Routes = Routes(baseUri: "/v2")
+
+// Add the main API calls to version 1
+api1Routes.add(routes: api)
+// Add the main API calls to version 2
+api2Routes.add(routes: api)
+// Update the call2 API
+api2Routes.add(method: .get, uri: "/call2", handler: { _, response in
+    response.setBody(string: "API v2 CALL 2")
+    response.completed()
+})
+
+// Add both versions to the main server routes
+routes.add(routes: api1Routes)
+routes.add(routes: api2Routes)
 server.addRoutes(routes)
 // Set a listen port of 8181
 server.serverPort = 8181
