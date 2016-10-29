@@ -1,5 +1,5 @@
 framework module CHTTPParser {
-    umbrella "/Users/phonex/Documents/Project_Code/Server_project/PerfectDemo/PerfectTemplate/Packages/PerfectHTTPServer-2.0.3/Sources/CHTTPParser/include"
+    umbrella "/Users/phonex/Documents/Server_project/PerferctLearning/Packages/PerfectHTTPServer-2.0.3/Sources/CHTTPParser/include"
     link framework "CHTTPParser"
     export *
 }
